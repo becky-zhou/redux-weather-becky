@@ -1,7 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import Reducer from './Reducer'; 
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import WeatherReducer from './Reducer'; 
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+
 
 //higher order function, takes a function as an argument
-const store = configureStore(Reducer); 
+const Store = configureStore(WeatherReducer,composeWithDevTools(applyMiddleware(thunk))
+); 
 
-export default store;  
+export default Store;  

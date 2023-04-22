@@ -7,7 +7,7 @@ const initialState = {
   };
 
 
-const weatherReducer =(state = initialState, action) => {
+const WeatherReducer =(state = initialState, action) => {
     switch(action.type) {
         case getWeather.PENDING:
             return {
@@ -35,5 +35,5 @@ const weatherReducer =(state = initialState, action) => {
     }
 }
 
-  export default weatherReducer;
+  export default WeatherReducer;
 
