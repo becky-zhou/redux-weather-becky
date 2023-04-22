@@ -1,17 +1,19 @@
 import './App.css';
 import React from 'react';
 //import FetchWeather from './FetchWeather'; 
-import { Provider } from 'react';
+import { Provider } from 'react-redux';
 import Weather from './components/Weather';
-import { Store } from './Store'; 
+import WeatherStore from './redux/Store'; 
 
 
-export const App = () => {
+const App = () => {
   return (
-    <Provider store={Store}>
+    <Provider store={WeatherStore}>
       <div>
         <Weather />
       </div>
     </Provider>
   )
 }
+
+export default App; 
