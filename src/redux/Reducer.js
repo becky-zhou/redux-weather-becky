@@ -1,13 +1,18 @@
 import { getWeather } from "./ActionTypes";
+//... spilt opertor?
 
 const initialState = {
+    city: '', 
+    temperature: '',
+    humidity: '',
+    pressure: '',
     loading: false,
     data: null,
     error: null
   };
 
 
-const WeatherReducer =(state = initialState, action) => {
+const WeatherReducer =(state = initialState, action) => { 
     switch(action.type) {
         case getWeather.PENDING:
             return {
