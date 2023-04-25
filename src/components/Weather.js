@@ -6,37 +6,43 @@ import React, { useState, useEffect } from 'react';
 //import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather } from '../redux/Actions';
-
+import { getWeather } from '../redux/ActionTypes';
+//import WeatherStore from './redux/Store'; 
 
   
 const Weather = () => {
-  const dispatch = useDispatch(); 
-  const [city, setCity] = useState(''); 
   const [searchInput, setSearchInput] = useState('');
-  const weatherData = useSelector(state => state); 
+  const temperature = useSelector(state => state.weather.temperature); 
+  const pressure = useSelector(state => state.weather.pressure); 
+  const humidity = useSelector(state => state.weather.humidity); 
 
-  useEffect(() => {
-    dispatch(fetchWeather());
-  }, [dispatch]);
-
+  const dispatch = useDispatch(); 
   
   const HandleSubmit = (e) => {
     e.preventDefault(); 
-    if(city){
-    dispatch(fetchWeather(searchInput)); 
-    setSearchInput(''); 
+    if(searchInput !== ''){
+      console.log('Search input:', searchInput); 
+      dispatch(fetchWeather(searchInput)); 
     }
+    console.log('weatherData at weather.js:', temperature.temperature, pressure.pressure); 
+
   }
+
+  // useEffect(() => {
+  //   if (weatherData && weatherData.success) {
+  //     console.log('Weather data loaded:', weatherData.data);
+  //   }
+  // }, [weatherData]);
 
   return (
     <div>
       <div className="heading"><h1>Weather</h1> </div>
-        <form onSubmit={HandleSubmit}>
+        <form className="search-form" onSubmit={HandleSubmit}>
           <input 
             type="text" 
-            value={city} 
+            value={searchInput} 
             placeholder='Enter a City'
-            onChange={(e) => setCity(e.target.value)} 
+            onChange={(e) => setSearchInput(e.target.value)} 
           />
           <button type="submit">Get Weather</button>
         </form>
@@ -52,19 +58,26 @@ const Weather = () => {
           </thead>
           <tbody>
             <tr>
-              <td><b>City</b>
-              {weatherData.success ? weatherData.data.main.name : null}
-              </td>
-              <td><b>Temp</b>{" "}
-              {weatherData.success ? weatherData.data.main.temp : null}
-              </td>
-              <td><b>Humidity</b>{" "}
-                {weatherData.success ? weatherData.data.main.humidity : null}
-              </td>
-              <td>
-                <b>Pressure</b>{" "}
-                {weatherData.success ? weatherData.data.main.pressure : null}
-              </td>
+               {getWeather.success ?  (
+                  <React.Fragment>
+                    <td>
+                      <b>City</b>{" "}
+                      {searchInput}
+                    </td>
+                    <td>
+                      <b>Temp</b>{" "}
+                      {temperature}
+                    </td>
+                    <td>
+                      <b>Pressure</b>{" "}
+                      {pressure}
+                    </td>
+                    <td>
+                      <b>Humidity</b>{" "}
+                      {humidity}
+                    </td>
+                  </React.Fragment>
+                ) : null}
             </tr>
           </tbody>
         </table>

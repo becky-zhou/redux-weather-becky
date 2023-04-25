@@ -10,8 +10,9 @@ const initialState = {
     data: null,
     error: null
   };
+console.log("intialState at reducer:",initialState); 
 
-
+//what is the action.payload for? 
 const WeatherReducer =(state = initialState, action) => { 
     switch(action.type) {
         case getWeather.PENDING:
