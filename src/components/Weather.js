@@ -1,6 +1,6 @@
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 //import Form from 'react-bootstrap/Form';
 //import Button from 'react-bootstrap/Button'; 
 //import { Table } from 'react-bootstrap';
@@ -12,9 +12,7 @@ import { getWeather } from '../redux/ActionTypes';
   
 const Weather = () => {
   const [searchInput, setSearchInput] = useState('');
-  const temperature = useSelector(state => state.weather.temperature); 
-  const pressure = useSelector(state => state.weather.pressure); 
-  const humidity = useSelector(state => state.weather.humidity); 
+  const weatherData = useSelector(state => state.weather); 
 
   const dispatch = useDispatch(); 
   
@@ -24,7 +22,7 @@ const Weather = () => {
       console.log('Search input:', searchInput); 
       dispatch(fetchWeather(searchInput)); 
     }
-    console.log('weatherData at weather.js:', temperature.temperature, pressure.pressure); 
+    console.log('weatherData at weather.js:', weatherData.data); 
 
   }
 
@@ -58,23 +56,19 @@ const Weather = () => {
           </thead>
           <tbody>
             <tr>
-               {getWeather.success ?  (
+               {weatherData && getWeather.SUCCESS ?  (
                   <React.Fragment>
                     <td>
-                      <b>City</b>{" "}
-                      {searchInput}
+                      {weatherData.data.city}
                     </td>
                     <td>
-                      <b>Temp</b>{" "}
-                      {temperature}
+                      {weatherData.data.temperature}
                     </td>
                     <td>
-                      <b>Pressure</b>{" "}
-                      {pressure}
+                      {weatherData.data.pressure}
                     </td>
                     <td>
-                      <b>Humidity</b>{" "}
-                      {humidity}
+                      {weatherData.data.humidity}
                     </td>
                   </React.Fragment>
                 ) : null}

@@ -7,8 +7,9 @@ const initialState = {
     humidity: '',
     pressure: '',
     loading: false,
-    data: null,
-    error: null
+    data: {},
+    error: null,
+    success: null
   };
 console.log("intialState at reducer:",initialState); 
 
@@ -19,22 +20,23 @@ const WeatherReducer =(state = initialState, action) => {
             return {
                 ...state, 
                 loading : true, 
-                data : null, 
-                error : null
+                success: null
             }; 
         case getWeather.SUCCESS: 
             return {
                 ...state, 
                 loading : false, 
                 data : action.payload,
-                error : null
+                error : null,
+                success: true
             }; 
         case getWeather.REJECTED: 
             return {
                 ...state, 
                 loading : false, 
                 data : null, 
-                error : action.payload
+                error : action.payload,
+                success: false
             }
         default: 
             return state; 
