@@ -21,18 +21,11 @@ const Weather = () => {
   const HandleSubmit = (e) => {
     e.preventDefault(); 
     if(searchInput !== ''){
-      console.log('Search input:', searchInput); 
+      // console.log('Search input:', searchInput); 
       dispatch(fetchWeather(searchInput)); 
     }
-    console.log('weatherData at weather.js:', weatherData.data); 
-
+    // console.log('weatherData at weather.js:', weatherData.data); 
   }
-
-  // useEffect(() => {
-  //   if (weatherData && weatherData.success) {
-  //     console.log('Weather data loaded:', weatherData.data);
-  //   }
-  // }, [weatherData]);
 
   return (
     <div>
@@ -58,7 +51,7 @@ const Weather = () => {
           </thead>
           <tbody>
             <tr>
-               {weatherData && getWeather.SUCCESS ?  (
+               {!weatherData.loading && weatherData.data.temperature && getWeather.SUCCESS ?  (
                   <React.Fragment>
                     <td>
                       {weatherData.data.city}
@@ -68,19 +61,23 @@ const Weather = () => {
                           <SparklinesLine />
                           <SparklinesReferenceLine type="mean" />
                       </Sparklines>
-                      {/* {weatherData.data.temperature[0]} */}
+                      {`${weatherData.data.temperature[0]} C°`}
                     </td>
                     <td>
                     <Sparklines data={weatherData.data.pressure}>
                           <SparklinesLine />
                           <SparklinesReferenceLine type="mean" />
-                      </Sparklines>                    
+                      </Sparklines>
+                      {`${weatherData.data.pressure[0]} hPa`}
+                    
                     </td>
                     <td>
                     <Sparklines data={weatherData.data.humidity}>
                           <SparklinesLine />
                           <SparklinesReferenceLine type="mean" />
-                      </Sparklines>                    
+                      </Sparklines>     
+                      {`${weatherData.data.humidity[0]} %`}
+               
                     </td>
                   </React.Fragment>
                 ) : null}

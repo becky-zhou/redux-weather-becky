@@ -6,15 +6,12 @@ const initialState = {
     temperature: [],
     humidity: [],
     pressure: [],
-    temperatureToday : '', 
-    pressureToday: '', 
-    humidityToday: '', 
     loading: false,
     data: {},
     error: null,
     success: null
   };
-console.log("intialState at reducer:",initialState); 
+// console.log("intialState at reducer:",initialState); 
 
 //what is the action.payload for? 
 const WeatherReducer =(state = initialState, action) => { 
@@ -23,7 +20,6 @@ const WeatherReducer =(state = initialState, action) => {
             return {
                 ...state, 
                 loading : true, 
-                success: null
             }; 
         case getWeather.SUCCESS: 
             return {
