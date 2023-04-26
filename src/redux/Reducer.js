@@ -3,9 +3,12 @@ import { getWeather } from "./ActionTypes";
 
 const initialState = {
     city: '', 
-    temperature: '',
-    humidity: '',
-    pressure: '',
+    temperature: [],
+    humidity: [],
+    pressure: [],
+    temperatureToday : '', 
+    pressureToday: '', 
+    humidityToday: '', 
     loading: false,
     data: {},
     error: null,
@@ -15,7 +18,7 @@ console.log("intialState at reducer:",initialState);
 
 //what is the action.payload for? 
 const WeatherReducer =(state = initialState, action) => { 
-    switch(action.type) {
+     switch(action.type) {
         case getWeather.PENDING:
             return {
                 ...state, 

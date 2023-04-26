@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather } from '../redux/Actions';
 import { getWeather } from '../redux/ActionTypes';
 //import WeatherStore from './redux/Store'; 
+import { Sparklines, SparklinesLine,SparklinesReferenceLine } from 'react-sparklines';
+
 
   
 const Weather = () => {
@@ -62,13 +64,23 @@ const Weather = () => {
                       {weatherData.data.city}
                     </td>
                     <td>
-                      {weatherData.data.temperature}
+                      <Sparklines data={weatherData.data.temperature}>
+                          <SparklinesLine />
+                          <SparklinesReferenceLine type="mean" />
+                      </Sparklines>
+                      {/* {weatherData.data.temperature[0]} */}
                     </td>
                     <td>
-                      {weatherData.data.pressure}
+                    <Sparklines data={weatherData.data.pressure}>
+                          <SparklinesLine />
+                          <SparklinesReferenceLine type="mean" />
+                      </Sparklines>                    
                     </td>
                     <td>
-                      {weatherData.data.humidity}
+                    <Sparklines data={weatherData.data.humidity}>
+                          <SparklinesLine />
+                          <SparklinesReferenceLine type="mean" />
+                      </Sparklines>                    
                     </td>
                   </React.Fragment>
                 ) : null}
