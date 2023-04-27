@@ -1,6 +1,5 @@
 import { getWeather } from "./ActionTypes";
-//... spilt opertor?
-
+ 
 const initialState = {
     city: '', 
     temperature: [],
@@ -11,8 +10,7 @@ const initialState = {
     error: null,
     success: null
   };
-// console.log("intialState at reducer:",initialState); 
-
+ 
 //what is the action.payload for? 
 const WeatherReducer =(state = initialState, action) => { 
      switch(action.type) {

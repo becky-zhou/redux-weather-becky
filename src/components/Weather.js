@@ -7,25 +7,24 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather } from '../redux/Actions';
 import { getWeather } from '../redux/ActionTypes';
-//import WeatherStore from './redux/Store'; 
 import { Sparklines, SparklinesLine,SparklinesReferenceLine } from 'react-sparklines';
 
 
   
 const Weather = () => {
   const [searchInput, setSearchInput] = useState('');
+  const [weatherArray, setWeatherArray] = useState([]);
   const weatherData = useSelector(state => state.weather); 
-
   const dispatch = useDispatch(); 
   
   const HandleSubmit = (e) => {
     e.preventDefault(); 
-    if(searchInput !== ''){
-      // console.log('Search input:', searchInput); 
-      dispatch(fetchWeather(searchInput)); 
-    }
-    // console.log('weatherData at weather.js:', weatherData.data); 
+   // if(searchInput !== ''){
+      dispatch(fetchWeather(searchInput))
+    //}
   }
+  console.log(weatherData); 
+
 
   return (
     <div>
@@ -39,12 +38,11 @@ const Weather = () => {
           />
           <button type="submit">Get Weather</button>
         </form>
-
         <table className="table">
           <thead>
             <tr>
               <th scope="col">City</th>
-              <th scope="col">Temperture(F)</th>
+              <th scope="col">Temperture(C)</th>
               <th scope="col">Pressure(hPa)</th>
               <th scope="col">Humidity(%)</th>
             </tr>
